@@ -1,0 +1,162 @@
+type: custom:stack-in-card
+mode: horizontal
+cards:
+  - type: vertical-stack
+    cards:
+      - type: custom:mushroom-template-card
+        primary: Living Room
+        secondary: >-
+          {{ states('sensor.livingroom_temperature_temperature')|round(0) }}°F |
+          {{ states('sensor.livingroom_temperature_humidity')|round(0) }}%
+        card_mod:
+          style:
+            mushroom-shape-icon$: |
+              .shape {
+                display: none !important;
+              }
+            .: |
+              ha-card {
+
+                border: 0px;
+                padding-left: 10px;
+                padding-top: 10px;
+                width: 500px;
+              }
+      - type: custom:mushroom-template-card
+        entity: switch.bedroom_lights_smart_plug
+        layout: horizontal
+        icon: mdi:sofa-outline
+        tap_action:
+          action: navigate
+          navigation_path: /dashboard-mobile/livingroom
+        hold_action:
+          action: more-info
+        double_tap_action:
+          action: more-info
+        icon_color: >-
+          {% if is_state('light.living_room_lights', 'on') or
+          is_state('media_player.samsung_tv_65_media', 'on') %} 
+            #2973B2 
+          {% else %}
+            #7A7A7F 
+          {% endif %}
+        primary_info: none
+        secondary_info: none
+        card_mod:
+          style:
+            mushroom-shape-icon$: |
+              .shape {
+                --icon-size: 135px;
+              }
+            .: |
+              ha-card {
+                border: 0px;
+                margin-left: -30px;
+                margin-top: -20px;
+
+              }
+  - type: custom:mushroom-chips-card
+    chips:
+      - type: template
+        entity: light.living_room_lights
+        tap_action:
+          action: toggle
+        hold_action:
+          action: more-info
+        double_tap_action:
+          action: more-info
+        icon: mdi:lightbulb-group
+        card_mod:
+          style: |
+            ha-card {
+              --chip-background: {% if is_state('light.living_room_lights', 'on') %} #2973B2 {% else %} #353535 {% endif %};
+              --color: {% if is_state('light.living_room_lights', 'on') %} #ffffff {% else %} #ebeaea {% endif %};
+              justify-content: center;
+              height: 35px !important;
+              width: 35px !important;
+              border: 0 !important;
+              box-shadow: none !important;
+              border-radius: 22px !important;
+            }
+      - type: template
+        entity: media_player.samsung_tv_65_media
+        tap_action:
+          action: toggle
+        hold_action:
+          action: more-info
+        double_tap_action:
+          action: none
+        icon: mdi:television
+        card_mod:
+          style: |
+            ha-card {
+              --chip-background: {% if is_state('media_player.samsung_tv_65_media', 'on') %} #835a3e {% else %} #353535 {% endif %};
+              --color: {% if is_state('media_player.samsung_tv_65_media', 'on') %}  #ffffff {% else %} #ebeaea{% endif %};
+              justify-content: center;
+              height: 35px !important;
+              width: 35px !important;
+              border: 0 !important;
+              box-shadow: none !important;
+              border-radius: 22px !important;
+            }
+      - type: template
+        entity: input_boolean.movie
+        tap_action:
+          action: toggle
+        hold_action:
+          action: more-info
+        double_tap_action:
+          action: none
+        icon: mdi:movie
+        card_mod:
+          style: |
+            ha-card {
+              --chip-background: {% if is_state('input_boolean.movie', 'on') %} #3D8D7A {% else %} #353535 {% endif %};
+              --color: {% if is_state('input_boolean.movie', 'on') %} #ffffff {% else %} #ebeaea {% endif %};
+              justify-content: center;
+              height: 35px !important;
+              width: 35px !important;
+              border: 0 !important;
+              box-shadow: none !important;
+              border-radius: 22px !important;
+            }
+      - type: template
+        entity: input_boolean.guest_mode
+        tap_action:
+          action: toggle
+        hold_action:
+          action: none
+        double_tap_action:
+          action: none
+        icon: mdi:account-heart-outline
+        card_mod:
+          style: |
+            ha-card {
+              --chip-background: {% if is_state('input_boolean.guest_mode', 'on') %} #E50046 {% else %} #353535 {% endif %};
+              --color: {% if is_state('input_boolean.guest_mode', 'on') %} #ffffff {% else %} #ebeaea {% endif %};
+              justify-content: center;
+              height: 35px !important;
+              width: 35px !important;
+              border: 0 !important;
+              box-shadow: none !important;
+              border-radius: 22px !important;
+            }
+    card_mod:
+      style: |
+        .chip-container {
+          flex-flow: column wrap-reverse !important;
+          display: flex !important;
+          --chip-spacing: 8px;
+          margin: 12px;
+        }
+        .: |
+        .container {
+          align: end;
+        }
+card_mod:
+  style: |
+    ha-card {
+      max-width: 100%;
+      min-width: 50%;
+      height: 186px;
+    }
