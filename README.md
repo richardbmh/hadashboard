@@ -62,21 +62,6 @@ I hope it inspires or helps you with your own smart home dashboard!
 - [Custom Brand Icons](https://github.com/elax46/custom-brand-icons)
 - [Kiosk Mode](https://github.com/NemesisRE/kiosk-mode)
 
-
-- <a href="https://github.com/kalkih/mini-graph-card" target="_blank">Lovelace Mini Graph Card</a>
-- <a href="https://github.com/Clooos/Bubble-Card" target="_blank">Bubble Card</a>
-- <a href="https://github.com/jianyu-li/yet-another-media-player" target="_blank">Yet Another Media Player</a>
-- <a href="https://github.com/joseluis9595/lovelace-navbar-card" target="_blank">Navbar Card</a>
-- <a href="https://github.com/alexpfau/calendar-card-pro" target="_blank">Calendar Card Pro</a>
-- <a href="https://github.com/piitaya/lovelace-mushroom" target="_blank">Mushroom</a>
-- <a href="https://github.com/custom-cards/button-card" target="_blank">button-card</a>
-- <a href="https://github.com/thomasloven/lovelace-card-mod" target="_blank">card-mod</a>
-- <a href="https://github.com/thomasloven/lovelace-layout-card" target="_blank">layout-card</a>
-- <a href="https://github.com/denysdovhan/vacuum-card" target="_blank">Vacuum Card</a>
-- <a href="https://github.com/ofekashery/vertical-stack-in-card" target="_blank">Vertical Stack In Card</a>
-- <a href="https://github.com/elax46/custom-brand-icons" target="_blank">Custom Brand Icons</a>
-- <a href="https://github.com/NemesisRE/kiosk-mode" target="_blank">Kiosk Mode</a>
-
 ---
 
 ## Initial Version
