@@ -3137,7 +3137,7 @@ views:
     theme: Tablet
     cards:
       - type: iframe
-        url: https://request.homene.ddnsfree.com/
+        url: https://url.com/
         aspect_ratio: 190%
         card_mod:
           style: |
