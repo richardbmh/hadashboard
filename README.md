@@ -62,7 +62,7 @@ I hope it inspires or helps you with your own smart home dashboard.
 - [Vertical Stack In Card](https://github.com/ofekashery/vertical-stack-in-card)
 - [Custom Brand Icons](https://github.com/elax46/custom-brand-icons)
 - [Kiosk Mode](https://github.com/NemesisRE/kiosk-mode)
-- [Stack In Card]([https://github.com/NemesisRE/kiosk-mode](https://github.com/custom-cards/stack-in-card?tab=readme-ov-file))
+- [Stack In Card](https://github.com/custom-cards/stack-in-card?tab=readme-ov-file)
 
 ---
 
