@@ -35,7 +35,7 @@ I hope it inspires or helps you with your own smart home dashboard.
 ![Living Room](/assets/v2/Livingroom.jpg)
 
 ### Car and 3D Printer
-![Carandprinter](/assets/v3/showcase.jpg)
+![Carandprinter](/assets/v3/carandprinter.jpg)
 
 ### Homelab
 ![Homelab](/assets/v2/office.jpg)
