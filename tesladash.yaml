@@ -1,0 +1,473 @@
+type: vertical-stack
+cards:
+  - type: custom:bubble-card
+    card_type: pop-up
+    hash: "#tesla"
+    button_type: name
+    name: yourcar
+    icon: phu:tesla-icon
+    sub_button: []
+    show_header: true
+    auto_close: "0"
+    margin: 7px
+    close_on_click: false
+    card_layout: normal
+  - type: custom:button-card
+    show_state: true
+    tap_action:
+      action: none
+    custom_fields:
+      tesla_image1:
+        card:
+          type: picture
+          image: local/Tesla.png
+          card_mod:
+            style: |
+              ha-card {
+                background-color: transparent;
+                border: none;
+                filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.1));
+                transition: all 0.3s ease;
+              }
+              ha-card:hover {
+                filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.2));
+                transform: scale(1.01);
+              }
+      battery_glow:
+        card:
+          type: custom:mushroom-template-card
+          primary: ""
+          card_mod:
+            style: |
+              ha-card {
+                background: radial-gradient(circle, 
+                  {% if states('sensor.yourcar_battery')|int > 80 %}
+                    rgba(0, 255, 0, 0.3) 0%, 
+                    rgba(0, 255, 0, 0.1) 50%, 
+                    transparent 100%
+                  {% elif states('sensor.yourcar_battery')|int > 50 %}
+                    rgba(255, 255, 0, 0.3) 0%, 
+                    rgba(255, 255, 0, 0.1) 50%, 
+                    transparent 100%
+                  {% elif states('sensor.yourcar_battery')|int > 25 %}
+                    rgba(255, 165, 0, 0.3) 0%, 
+                    rgba(255, 165, 0, 0.1) 50%, 
+                    transparent 100%
+                  {% else %}
+                    rgba(255, 0, 0, 0.3) 0%, 
+                    rgba(255, 0, 0, 0.1) 50%, 
+                    transparent 100%
+                  {% endif %});
+                border: none;
+                animation: pulse-battery 3s ease-in-out infinite;
+              }
+              @keyframes pulse-battery {
+                0%, 100% { opacity: 0.6; }
+                50% { opacity: 1; }
+              }
+      battery_info:
+        card:
+          type: custom:mushroom-template-card
+          primary: "{{ states('sensor.yourcar_battery') }}%"
+          secondary: Battery
+          card_mod:
+            style:
+              mushroom-state-info$: |
+                .primary {
+                  font-size: clamp(16px, 2.5vw, 20px) !important;
+                  font-weight: 700 !important;
+                  color: white !important;
+                  text-align: center !important;
+                  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3) !important;
+                }
+                .secondary {
+                  font-size: clamp(12px, 1.8vw, 16px) !important;
+                  color: rgba(255, 255, 255, 0.8) !important;
+                  text-align: center !important;
+                  text-shadow: 0 0 5px rgba(255, 255, 255, 0.2) !important;
+                }
+              .: |
+                ha-card {
+                  background: transparent !important;
+                  border: none !important;
+                  box-shadow: none !important;
+                  text-align: center !important;
+                }
+      range_info:
+        card:
+          type: custom:mushroom-template-card
+          primary: "{{ states('sensor.yourcar_range') }} mi"
+          secondary: Range
+          card_mod:
+            style:
+              mushroom-state-info$: |
+                .primary {
+                  font-size: clamp(16px, 2.5vw, 20px) !important;
+                  font-weight: 700 !important;
+                  color: white !important;
+                  text-align: center !important;
+                  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3) !important;
+                }
+                .secondary {
+                  font-size: clamp(12px, 1.8vw, 16px) !important;
+                  color: rgba(255, 255, 255, 0.8) !important;
+                  text-align: center !important;
+                  text-shadow: 0 0 5px rgba(255, 255, 255, 0.2) !important;
+                }
+              .: |
+                ha-card {
+                  background: transparent !important;
+                  border: none !important;
+                  box-shadow: none !important;
+                  text-align: center !important;
+                }
+      odometer_info:
+        card:
+          type: custom:mushroom-template-card
+          primary: >-
+            {{ states('sensor.yourcar_odometer') | int | string |
+            regex_replace('(\d)(?=(\d{10})+$)', '\1,') }} mi
+          secondary: Odometer
+          card_mod:
+            style:
+              mushroom-state-info$: |
+                .primary {
+                  font-size: clamp(16px, 2.5vw, 20px) !important;
+                  font-weight: 700 !important;
+                  color: white !important;
+                  text-align: center !important;
+                  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3) !important;
+                }
+                .secondary {
+                  font-size: clamp(12px, 1.8vw, 16px) !important;
+                  color: rgba(255, 255, 255, 0.8) !important;
+                  text-align: center !important;
+                  text-shadow: 0 0 5px rgba(255, 255, 255, 0.2) !important;
+                }
+              .: |
+                ha-card {
+                  background: transparent !important;
+                  border: none !important;
+                  box-shadow: none !important;
+                  text-align: center !important;
+                }
+    styles:
+      card:
+        - width: 100%
+        - max-width: 100%
+        - min-height: 50vh
+        - height: auto
+        - aspect-ratio: 16/9
+        - background: |
+            [[[
+              return `linear-gradient(145deg, 
+                rgba(0, 0, 0, 0.95) 0%, 
+                rgba(15, 15, 25, 0.98) 50%, 
+                rgba(0, 0, 0, 0.95) 100%)`;
+            ]]]
+        - border: 1px solid rgba(255, 255, 255, 0.1)
+        - border-radius: 20px
+        - box-shadow: |
+            [[[
+              return `0 0 40px rgba(0, 0, 0, 0.8), 
+                      inset 0 0 20px rgba(255, 255, 255, 0.02)`;
+            ]]]
+        - backdrop-filter: blur(10px)
+        - transition: all 0.3s ease
+        - overflow: hidden
+        - display: grid
+        - grid-template-columns: 1fr
+        - grid-template-rows: 1fr auto
+        - gap: 1rem
+        - padding: 1rem
+      custom_fields:
+        tesla_image1:
+          - position: absolute
+          - top: 0
+          - left: 0
+          - width: 100%
+          - height: calc(100% - 100px)
+          - z-index: 1
+        battery_glow:
+          - position: absolute
+          - top: 55%
+          - right: 15%
+          - width: clamp(80px, 12vw, 120px)
+          - height: clamp(50px, 8vw, 80px)
+          - z-index: 2
+        charging_effect:
+          - position: absolute
+          - top: 52%
+          - right: 8%
+          - width: clamp(40px, 6vw, 60px)
+          - height: clamp(40px, 6vw, 60px)
+          - z-index: 3
+        battery_info:
+          - position: absolute
+          - bottom: 1rem
+          - height: clamp(60px, 10vh, 80px)
+          - z-index: 5
+          - display: flex
+          - align-items: center
+          - justify-content: center
+          - width: calc(33.33% - 1rem)
+          - left: 1rem
+        range_info:
+          - position: absolute
+          - bottom: 1rem
+          - height: clamp(60px, 10vh, 80px)
+          - z-index: 5
+          - display: flex
+          - align-items: center
+          - justify-content: center
+          - width: calc(33.33% - 1rem)
+          - left: calc(33.33% + 0.5rem)
+        odometer_info:
+          - position: absolute
+          - bottom: 1rem
+          - height: clamp(60px, 10vh, 80px)
+          - z-index: 5
+          - display: flex
+          - align-items: center
+          - justify-content: center
+          - width: calc(33.33% - 1rem)
+          - right: 1rem
+      name:
+        - justify-self: start
+        - align-self: start
+        - font-size: clamp(18px, 3vw, 24px)
+        - font-weight: 500
+        - color: white
+        - text-shadow: 0 0 10px rgba(255, 255, 255, 0.5)
+      state:
+        - min-height: clamp(60px, 10vh, 80px)
+        - justify-self: start
+        - align-self: start
+        - font-size: clamp(14px, 2.5vw, 18px)
+        - opacity: "0.7"
+    card_mod:
+      style: |
+        ha-card {
+          position: relative;
+        }
+
+        /* Mobile responsive adjustments */
+        @media (max-width: 768px) {
+          .custom-field[data-field="battery_info"] {
+            width: calc(33.33% - 1rem) !important;
+            left: 1rem !important;
+          }
+          
+          .custom-field[data-field="range_info"] {
+            width: calc(33.33% - 1rem) !important;
+            left: calc(33.33% + 0.5rem) !important;
+          }
+          
+          .custom-field[data-field="odometer_info"] {
+            width: calc(33.33% - 1rem) !important;
+            right: 1rem !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .custom-field[data-field="battery_info"],
+          .custom-field[data-field="range_info"],
+          .custom-field[data-field="odometer_info"] {
+            width: calc(100% - 2rem) !important;
+            left: 1rem !important;
+            right: 1rem !important;
+            text-align: center !important;
+          }
+          
+          .custom-field[data-field="range_info"] {
+            bottom: calc(1rem + 50px) !important;
+          }
+          
+          .custom-field[data-field="odometer_info"] {
+            bottom: calc(1rem + 100px) !important;
+          }
+        }
+  - type: vertical-stack
+    cards:
+      - square: false
+        type: grid
+        cards:
+          - type: custom:mushroom-template-card
+            secondary: |
+              {% if is_state('sensor.yourcar_shift_state', 'P') %}
+                Parked
+              {% elif is_state('sensor.yourcar_shift_state', 'R') %}
+                Reverse
+              {% elif is_state('sensor.yourcar_shift_state', 'N') %}
+                Neutral
+              {% elif is_state('sensor.yourcar_shift_state', 'D') %}
+                Drive
+              {% else %}
+                Unknown
+              {% endif %}
+            icon: mdi:power
+            primary: Remote Start
+            icon_color: blue
+            entity: sensor.yourcar_shift_state
+            layout: vertical
+            badge_icon: ""
+            tap_action:
+              action: perform-action
+              perform_action: button.press
+              target:
+                entity_id: button.yourcar_remote_start
+            hold_action:
+              action: none
+            double_tap_action:
+              action: none
+            card_mod:
+              style: |
+                ha-card {
+                  box-shadow: none;
+                  border: none;
+                }
+          - type: custom:mushroom-template-card
+            icon: |-
+              {% set battery = states('sensor.yourcar_battery') | int %}
+
+              {% if battery >= 95 %}
+                mdi:battery
+              {% elif battery >= 80 %}
+                mdi:battery-90
+              {% elif battery >= 60 %}
+                mdi:battery-70
+              {% elif battery >= 40 %}
+                mdi:battery-50
+              {% elif battery >= 20 %}
+                mdi:battery-30
+              {% elif battery >= 10 %}
+                mdi:battery-20
+              {% else %}
+                mdi:battery-alert
+              {% endif %}
+            icon_color: |
+              {% set battery = states('sensor.yourcar_battery') | int %}
+
+              {% if battery >= 80 %}
+                green
+              {% elif battery >= 40 %}
+                orange
+              {% else %}
+                red
+              {% endif %}
+            layout: vertical
+            badge_icon: ""
+            tap_action:
+              action: none
+            hold_action:
+              action: none
+            double_tap_action:
+              action: none
+            secondary: |-
+              {% if is_state('binary_sensor.yourcar_charging', 'on') %}
+                 Charging
+              {% else %}
+                Not Charging
+              {% endif %}
+            primary: |
+              {{ states('sensor.yourcar_battery') }}%
+            card_mod:
+              style: |
+                ha-card {
+                  box-shadow: none;
+                  border: none;
+                }
+          - type: custom:mushroom-template-card
+            layout: vertical
+            badge_icon: ""
+            tap_action:
+              action: none
+            hold_action:
+              action: none
+            double_tap_action:
+              action: none
+            secondary: >-
+              {{ states('sensor.yourcar_temperature_outside') | float | round
+              }}°F Out
+            icon_color: green
+            primary: >+
+              {{ states('sensor.yourcar_temperature_inside') | float | round }}°F
+              In
+
+            icon: mdi:thermometer
+            card_mod:
+              style: |
+                ha-card {
+                  box-shadow: none;
+                  border: none;
+                }
+        columns: 3
+      - square: false
+        type: grid
+        cards:
+          - type: custom:mushroom-entity-card
+            entity: binary_sensor.yourcar_doors
+            icon: mdi:car-door-lock
+            icon_color: light-blue
+            tap_action:
+              action: none
+            hold_action:
+              action: none
+            double_tap_action:
+              action: none
+            name: Doors
+            layout: horizontal
+            fill_container: false
+            card_mod:
+              style: |
+                ha-card {
+                  box-shadow: none;
+                  border: none;
+                }
+          - type: custom:mushroom-template-card
+            layout: horizontal
+            badge_icon: ""
+            tap_action:
+              action: none
+            hold_action:
+              action: none
+            double_tap_action:
+              action: none
+            secondary: |-
+              {% if is_state('binary_sensor.yourcar_user_present', 'on') %}
+                 Present
+              {% else %}
+                Not Present
+              {% endif %}
+            primary: |
+              Driver
+            entity: binary_sensor.yourcar_user_present
+            icon: mdi:account-check
+            icon_color: yellow
+            card_mod:
+              style: |
+                ha-card {
+                  box-shadow: none;
+                  border: none;
+                }
+          - type: custom:mushroom-entity-card
+            entity: button.yourcar_force_data_update
+            name: Uptime
+            icon: mdi:database-sync
+            icon_color: cyan
+            hold_action:
+              action: none
+            double_tap_action:
+              action: none
+            tap_action:
+              action: perform-action
+              perform_action: button.press
+              target:
+                entity_id: button.yourcar_force_data_update
+            card_mod:
+              style: |
+                ha-card {
+                  box-shadow: none;
+                  border: none;
+                }
+        columns: 3

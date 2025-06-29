@@ -1,0 +1,409 @@
+type: vertical-stack
+cards:
+  - type: custom:bubble-card
+    card_type: pop-up
+    hash: "#3dprinter"
+    button_type: name
+    icon: phu:3dprinter-standby
+    name: Creality K1C Printer
+    card_layout: normal
+    auto_close: "0"
+  - type: custom:button-card
+    show_state: true
+    tap_action:
+      action: none
+    custom_fields:
+      printer_camera:
+        card:
+          type: picture-entity
+          entity: camera.creality_k1c
+          camera_image: camera.creality_k1c
+          camera_view: live
+          show_name: false
+          show_state: false
+          card_mod:
+            style: |
+              ha-card {
+                background-color: transparent;
+                border: none;
+                filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.1));
+                transition: all 0.3s ease;
+              }
+              ha-card:hover {
+                filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.2));
+                transform: scale(1.01);
+              }
+      progress_info:
+        card:
+          type: custom:mushroom-template-card
+          primary: "{{ states('sensor.k1c_a309_progress') }}%"
+          secondary: Progress
+          card_mod:
+            style:
+              mushroom-state-info$: |
+                .primary {
+                  font-size: clamp(14px, 2vw, 18px) !important;
+                  font-weight: 700 !important;
+                  color: white !important;
+                  text-align: center !important;
+                  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3) !important;
+                }
+                .secondary {
+                  font-size: clamp(10px, 1.5vw, 14px) !important;
+                  color: rgba(255, 255, 255, 0.8) !important;
+                  text-align: center !important;
+                  text-shadow: 0 0 5px rgba(255, 255, 255, 0.2) !important;
+                }
+              .: |
+                ha-card {
+                  background: transparent !important;
+                  border: none !important;
+                  box-shadow: none !important;
+                  text-align: center !important;
+                }
+      filament_info:
+        card:
+          type: custom:mushroom-template-card
+          primary: "{{ states('sensor.k1c_a309_filament_used') }} m"
+          secondary: Filament Used
+          card_mod:
+            style:
+              mushroom-state-info$: |
+                .primary {
+                  font-size: clamp(14px, 2vw, 18px) !important;
+                  font-weight: 700 !important;
+                  color: white !important;
+                  text-align: center !important;
+                  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3) !important;
+                }
+                .secondary {
+                  font-size: clamp(10px, 1.5vw, 14px) !important;
+                  color: rgba(255, 255, 255, 0.8) !important;
+                  text-align: center !important;
+                  text-shadow: 0 0 5px rgba(255, 255, 255, 0.2) !important;
+                }
+              .: |
+                ha-card {
+                  background: transparent !important;
+                  border: none !important;
+                  box-shadow: none !important;
+                  text-align: center !important;
+                }
+      eta_info:
+        card:
+          type: custom:mushroom-template-card
+          primary: >-
+            {% if states('sensor.k1c_a309_current_print_state') == 'printing' or
+            states('sensor.k1c_a309_print_eta') == 'Printing' %}
+              Printing
+            {% else %}
+              Standby
+            {% endif %}
+          secondary: Status
+          card_mod:
+            style:
+              mushroom-state-info$: |
+                .primary {
+                  font-size: clamp(14px, 2vw, 18px) !important;
+                  font-weight: 700 !important;
+                  color: white !important;
+                  text-align: center !important;
+                  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3) !important;
+                }
+                .secondary {
+                  font-size: clamp(10px, 1.5vw, 14px) !important;
+                  color: rgba(255, 255, 255, 0.8) !important;
+                  text-align: center !important;
+                  text-shadow: 0 0 5px rgba(255, 255, 255, 0.2) !important;
+                }
+              .: |
+                ha-card {
+                  background: transparent !important;
+                  border: none !important;
+                  box-shadow: none !important;
+                  text-align: center !important;
+                }
+    styles:
+      card:
+        - width: 100%
+        - max-width: 100%
+        - min-height: 50vh
+        - height: auto
+        - aspect-ratio: 16/9
+        - background: |
+            [[[
+              return `linear-gradient(145deg, rgba(0, 0, 0, 0.95) 0%, rgba(15, 15, 25, 0.98) 50%, rgba(0, 0, 0, 0.95) 100%)`;
+            ]]]
+        - border: 1px solid rgba(255, 255, 255, 0.1)
+        - border-radius: 20px
+        - box-shadow: |
+            [[[
+              return `0 0 20px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(255, 255, 255, 0.02)`;
+            ]]]
+        - backdrop-filter: blur(10px)
+        - transition: all 0.3s ease
+        - overflow: hidden
+        - display: grid
+        - grid-template-columns: 1fr
+        - grid-template-rows: 1fr auto
+        - gap: 1rem
+        - padding: 1rem
+      custom_fields:
+        printer_camera:
+          - position: absolute
+          - top: 0
+          - left: 0
+          - width: 100%
+          - height: calc(100% - 70px)
+          - z-index: 1
+        progress_info:
+          - position: absolute
+          - bottom: 1rem
+          - height: clamp(40px, 6vh, 50px)
+          - z-index: 5
+          - display: flex
+          - align-items: center
+          - justify-content: center
+          - width: calc(33.33% - 1rem)
+          - left: 1rem
+        filament_info:
+          - position: absolute
+          - bottom: 1rem
+          - height: clamp(40px, 6vh, 50px)
+          - z-index: 5
+          - display: flex
+          - align-items: center
+          - justify-content: center
+          - width: calc(33.33% - 1rem)
+          - left: calc(33.33% + 0.5rem)
+        eta_info:
+          - position: absolute
+          - bottom: 1rem
+          - height: clamp(40px, 6vh, 50px)
+          - z-index: 5
+          - display: flex
+          - align-items: center
+          - justify-content: center
+          - width: calc(33.33% - 1rem)
+          - right: 1rem
+    card_mod:
+      style: |
+        ha-card {
+          position: relative;
+        }
+  - square: false
+    type: grid
+    cards:
+      - type: custom:mushroom-template-card
+        layout: horizontal
+        tap_action:
+          action: none
+        hold_action:
+          action: toggle
+        double_tap_action:
+          action: none
+        secondary: |-
+          {% if is_state('switch.teckin_smart_plug_2_socket', 'on') %}
+             {{states('sensor.teckin_smart_plug_2_power')}} W
+          {% else %}
+          Off
+          {% endif %}
+        entity: switch.teckin_smart_plug_2_socket
+        icon_color: |-
+          {% if is_state('switch.teckin_smart_plug_2_socket', 'on') %}
+             #C5172E
+          {% else %}
+          disabled
+          {% endif %}
+        icon: mdi:power
+        primary: Power
+        badge_icon: ""
+        card_mod:
+          style: |
+            ha-card {
+              box-shadow: none;
+              border: none;
+            }
+      - type: custom:mushroom-template-card
+        layout: horizontal
+        tap_action:
+          action: perform-action
+          perform_action: button.press
+          target:
+            entity_id: button.k1c_a309_pause_print
+        hold_action:
+          action: toggle
+        double_tap_action:
+          action: perform-action
+          perform_action: button.press
+          target:
+            entity_id:
+              - button.k1c_a309_cancel_print
+        secondary: Cancel
+        icon: mdi:pause
+        primary: Pause
+        badge_icon: ""
+        entity: button.k1c_a309_pause_print
+        icon_color: accent
+        card_mod:
+          style: |
+            ha-card {
+              box-shadow: none;
+              border: none;
+            }
+      - type: custom:mushroom-template-card
+        layout: horizontal
+        tap_action:
+          action: perform-action
+          perform_action: button.press
+          target:
+            entity_id:
+              - button.k1c_a309_resume_print
+        hold_action:
+          action: toggle
+        double_tap_action:
+          action: perform-action
+          perform_action: button.press
+          target:
+            entity_id: button.k1c_a309_host_restart
+        secondary: Restart
+        icon: mdi:play
+        primary: Resume
+        badge_icon: ""
+        entity: button.k1c_a309_pause_print
+        icon_color: "#3E7B27"
+        card_mod:
+          style: |
+            ha-card {
+              box-shadow: none;
+              border: none;
+            }
+    columns: 3
+  - square: false
+    type: grid
+    cards:
+      - type: custom:mushroom-entity-card
+        entity: sensor.k1c_a309_extruder_temperature
+        icon: ""
+        icon_color: deep-orange
+        tap_action:
+          action: none
+        hold_action:
+          action: none
+        double_tap_action:
+          action: none
+        name: Extruder
+        layout: horizontal
+        fill_container: false
+        card_mod:
+          style: |
+            ha-card {
+              box-shadow: none;
+              border: none;
+            }
+      - type: custom:mushroom-entity-card
+        entity: sensor.k1c_a309_bed_temperature
+        icon: mdi:radiator
+        icon_color: light-green
+        tap_action:
+          action: none
+        hold_action:
+          action: none
+        double_tap_action:
+          action: none
+        name: Bed
+        layout: horizontal
+        fill_container: false
+        card_mod:
+          style: |
+            ha-card {
+              box-shadow: none;
+              border: none;
+            }
+      - type: custom:mushroom-entity-card
+        entity: sensor.k1c_a309_chamber_temp
+        icon: mdi:file-presentation-box
+        icon_color: indigo
+        tap_action:
+          action: none
+        hold_action:
+          action: none
+        double_tap_action:
+          action: none
+        name: Chamber
+        layout: horizontal
+        fill_container: false
+        card_mod:
+          style: |
+            ha-card {
+              box-shadow: none;
+              border: none;
+            }
+    columns: 3
+  - square: false
+    type: grid
+    cards:
+      - type: custom:mushroom-template-card
+        layout: horizontal
+        tap_action:
+          action: none
+        hold_action:
+          action: toggle
+        double_tap_action:
+          action: none
+        secondary: >-
+          {% if is_state('binary_sensor.k1c_a309_filament_sensor', 'on') and
+          is_state('binary_sensor.k1c_a309_filament_sensor_2', 'on') %}
+            Present
+          {% else %}
+            No Filament
+          {% endif %}
+        icon: phu:3d-filament
+        badge_icon: ""
+        icon_color: "#077A7D"
+        primary: Filament
+        card_mod:
+          style: |
+            ha-card {
+              box-shadow: none;
+              border: none;
+            }
+      - type: custom:mushroom-template-card
+        layout: horizontal
+        tap_action:
+          action: none
+        hold_action:
+          action: toggle
+        double_tap_action:
+          action: none
+        icon: phu:3d-filament
+        primary: Total
+        badge_icon: ""
+        icon_color: "#706D54"
+        secondary: "{{ states('sensor.k1c_a309_totals_filament_used')}} m"
+        card_mod:
+          style: |
+            ha-card {
+              box-shadow: none;
+              border: none;
+            }
+      - type: custom:mushroom-template-card
+        layout: horizontal
+        tap_action:
+          action: none
+        hold_action:
+          action: toggle
+        double_tap_action:
+          action: none
+        icon: mdi:numeric
+        primary: Jobs
+        badge_icon: ""
+        icon_color: "#754E1A"
+        secondary: "{{ states('sensor.k1c_a309_totals_jobs')}} total"
+        card_mod:
+          style: |
+            ha-card {
+              box-shadow: none;
+              border: none;
+            }
+    columns: 3
