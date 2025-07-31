@@ -28,7 +28,7 @@ I hope it inspires or helps you with your own smart home dashboard.
 
 ## Latest Version
 1. The New Dashboard is under newdash.yaml
-![Homepage](/assets/v4/white.PNG)
+![Homepage](/assets/v4/white.PNG)![Homepage](/assets/v4/white2.jpeg)
 ![Homepage](/assets/v4/dark.PNG)
 
 ### Homepage
