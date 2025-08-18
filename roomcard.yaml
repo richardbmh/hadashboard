@@ -28,7 +28,7 @@ cards:
         icon: mdi:sofa-outline
         tap_action:
           action: navigate
-          navigation_path: /dashboard-mobile/livingroom
+          navigation_path: "#livingroom"
         hold_action:
           action: more-info
         double_tap_action:
@@ -121,19 +121,19 @@ cards:
               border-radius: 22px !important;
             }
       - type: template
-        entity: input_boolean.guest_mode
+        entity: light.0xb0ce181400038bcc
         tap_action:
           action: toggle
         hold_action:
           action: none
         double_tap_action:
-          action: none
-        icon: mdi:account-heart-outline
+          action: more-info
+        icon: mdi:post-lamp
         card_mod:
           style: |
             ha-card {
-              --chip-background: {% if is_state('input_boolean.guest_mode', 'on') %} #E50046 {% else %} #353535 {% endif %};
-              --color: {% if is_state('input_boolean.guest_mode', 'on') %} #ffffff {% else %} #ebeaea {% endif %};
+              --chip-background: {% if is_state('light.0xb0ce181400038bcc', 'on') %} #E50046 {% else %} #353535 {% endif %};
+              --color: {% if is_state('light.0xb0ce181400038bcc', 'on') %} #ffffff {% else %} #ebeaea {% endif %};
               justify-content: center;
               height: 35px !important;
               width: 35px !important;
@@ -158,5 +158,8 @@ card_mod:
     ha-card {
       max-width: 100%;
       min-width: 50%;
-      height: 186px;
+      height: 185px;
+      background: none;
+      box-shadow: 0.5px;
+      border: none;
     }
