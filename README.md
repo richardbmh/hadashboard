@@ -6,6 +6,9 @@ Several people have asked to see my setup, so I'm excited to share what I’ve b
 I hope it inspires or helps you with your own smart home dashboard.
 
 ---
+## Icons too small after Mushroom Card v5.0.5 update
+Replace the template:mushroom-card with custom:mushroom-legacy-template-card
+This should fix the issue- updating the yaml with the fix.
 
 ## How to Use
 
