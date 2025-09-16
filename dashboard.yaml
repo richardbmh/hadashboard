@@ -23,7 +23,7 @@ views:
     cards:
       - type: horizontal-stack
         cards:
-          - type: custom:mushroom-chips-card
+          - type: custom:mushroom-legacy-template-card
             chips:
               - type: template
                 entity: binary_sensor.main_door_contact_sensor_contact
@@ -406,7 +406,7 @@ views:
                             margin-top: -20px;
 
                           }
-              - type: custom:mushroom-chips-card
+              - type: custom:mushroom-legacy-template-card
                 chips:
                   - type: template
                     entity: light.living_room_lights
@@ -574,7 +574,7 @@ views:
                             margin-top: -20px;
 
                           }
-              - type: custom:mushroom-chips-card
+              - type: custom:mushroom-legacy-template-card
                 chips:
                   - type: template
                     entity: light.bedroom_lights
@@ -743,7 +743,7 @@ views:
                             margin-top: -20px;
 
                           }
-              - type: custom:mushroom-chips-card
+              - type: custom:mushroom-legacy-template-card
                 chips:
                   - type: template
                     entity: light.kitchen_lights
@@ -909,7 +909,7 @@ views:
                             margin-top: -20px;
 
                           }
-              - type: custom:mushroom-chips-card
+              - type: custom:mushroom-legacy-template-card
                 chips:
                   - type: template
                     entity: light.office_lights
@@ -1073,7 +1073,7 @@ views:
                         margin-top: -20px;
 
                       }
-          - type: custom:mushroom-chips-card
+          - type: custom:mushroom-legacy-template-card
             chips:
               - type: template
                 entity: light.bathroom_lights
@@ -1394,7 +1394,7 @@ views:
     cards:
       - type: horizontal-stack
         cards:
-          - type: custom:mushroom-chips-card
+          - type: custom:mushroom-legacy-template-card
             chips:
               - type: template
                 entity: sensor.estimated_monthly_server_cost
@@ -3625,7 +3625,7 @@ views:
     path: cleaning
     title: CLEANING
     cards:
-      - type: custom:mushroom-chips-card
+      - type: custom:mushroom-legacy-template-card
         chips:
           - type: template
             tap_action:
